@@ -83,7 +83,26 @@ NSArray *tableData;
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 1;
+//    return 1;
+    
+    NSInteger numOfSections = 1;
+    if (self.allMessageArray.count>0)
+    {
+        self.chatTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections                = 1;
+        self.chatTableView.backgroundView = nil;
+    }
+    else
+    {
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.chatTableView.bounds.size.width, self.chatTableView.bounds.size.height)];
+        noDataLabel.text             = @"No data available";
+        noDataLabel.textColor        = [UIColor blackColor];
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        self.chatTableView.backgroundView = noDataLabel;
+        self.chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
